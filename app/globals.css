@@ -1,10 +1,15 @@
 :root {
   --font-sans: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --bg: #050408;
-  --fg: #fefefe;
-  --fg-muted: #c8c6d2;
-  --glass: rgba(255, 255, 255, 0.08);
-  --stroke: rgba(255, 255, 255, 0.2);
+  --bg: #f4ecde;
+  --paper: #fdf8ef;
+  --paper-secondary: #f1e4d3;
+  --ink: #2b2018;
+  --ink-muted: #594b3d;
+  --edge: #d5c5b4;
+  --shadow-soft: 0 20px 50px rgba(43, 32, 24, 0.2);
+  --grain: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.6) 0, rgba(255, 255, 255, 0) 35%),
+    radial-gradient(circle at 80% 10%, rgba(255, 219, 170, 0.4) 0, rgba(255, 255, 255, 0) 35%),
+    radial-gradient(circle at 50% 70%, rgba(184, 214, 196, 0.35) 0, rgba(255, 255, 255, 0) 35%);
 }
 
 * {
@@ -15,7 +20,11 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   background-color: var(--bg);
-  color: var(--fg);
+  background-image: var(--grain),
+    linear-gradient(90deg, rgba(43, 32, 24, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(43, 32, 24, 0.03) 1px, transparent 1px);
+  background-size: auto, 18px 18px, 18px 18px;
+  color: var(--ink);
   min-height: 100vh;
 }
 
@@ -23,29 +32,22 @@ body {
   position: relative;
   isolation: isolate;
   min-height: 100vh;
-  padding: 4rem 1.5rem 5rem;
+  padding: 3.5rem 1.5rem 4.5rem;
   overflow: hidden;
 }
 
 .plasma {
   position: absolute;
-  inset: -30% auto auto 50%;
-  width: 140vmax;
-  height: 140vmax;
-  background: radial-gradient(circle at 30% 30%, rgba(206, 92, 255, 0.5), transparent 55%),
-    radial-gradient(circle at 70% 40%, rgba(0, 198, 255, 0.35), transparent 60%),
-    radial-gradient(circle at 40% 70%, rgba(255, 112, 67, 0.35), transparent 55%);
-  filter: blur(50px) saturate(150%);
-  opacity: 0.7;
-  transform: translate(-50%, -25%);
-  animation: drift 18s linear infinite alternate;
+  inset: -12% auto auto 42%;
+  width: 110vmax;
+  height: 110vmax;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 207, 149, 0.5), transparent 50%),
+    radial-gradient(circle at 70% 55%, rgba(144, 186, 171, 0.45), transparent 55%),
+    radial-gradient(circle at 50% 80%, rgba(209, 169, 137, 0.4), transparent 60%);
+  filter: blur(40px) saturate(120%);
+  opacity: 0.9;
+  transform: translate(-45%, -25%);
   z-index: -2;
-}
-
-@keyframes drift {
-  to {
-    transform: translate(-45%, -20%) rotate(5deg);
-  }
 }
 
 .grid {
@@ -56,23 +58,39 @@ body {
 }
 
 .hero {
-  padding: 2rem;
-  border: 1px solid var(--stroke);
-  border-radius: 1.5rem;
-  background: rgba(5, 4, 8, 0.65);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+  position: relative;
+  padding: 2.25rem;
+  border: 1px solid var(--edge);
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(244, 236, 222, 0.95)), var(--paper);
+  box-shadow: var(--shadow-soft), 0 0 0 12px rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 12px 14px auto auto;
+  width: 110px;
+  height: 22px;
+  background: repeating-linear-gradient(90deg, rgba(43, 32, 24, 0.08) 0 10px, rgba(43, 32, 24, 0.16) 10px 20px);
+  transform: rotate(2.5deg);
+  opacity: 0.45;
+  border-radius: 5px;
+  box-shadow: 0 6px 16px rgba(43, 32, 24, 0.15);
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 5vw, 3.8rem);
-  margin-bottom: 0.75rem;
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  margin-bottom: 0.6rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
 }
 
 .hero p {
-  max-width: 60ch;
-  line-height: 1.6;
-  color: var(--fg-muted);
+  max-width: 64ch;
+  line-height: 1.7;
+  color: var(--ink-muted);
 }
 
 .badge {
@@ -80,142 +98,194 @@ body {
   align-items: center;
   gap: 0.35rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   font-size: 0.75rem;
-  color: #fecdff;
-  padding: 0.4rem 0.75rem;
-  border-radius: 999px;
-  border: 1px solid rgba(254, 205, 255, 0.4);
+  color: var(--ink);
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px dashed var(--ink);
+  background: linear-gradient(90deg, rgba(255, 227, 188, 0.9), rgba(255, 243, 220, 0.9));
+  box-shadow: 4px 4px 0 rgba(43, 32, 24, 0.15);
   margin-bottom: 1rem;
 }
 
 .actions {
-  margin-top: 1.75rem;
+  margin-top: 1.8rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .action {
   text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 0.9rem 1.4rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  color: var(--bg);
-  background: linear-gradient(120deg, #ff9bff, #7ee8ff);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.95rem 1.4rem;
+  border-radius: 0.9rem;
+  border: 1px solid #cba670;
+  color: var(--ink);
+  background: linear-gradient(135deg, #ffe3b0, #ffd29a);
+  box-shadow: 5px 5px 0 rgba(43, 32, 24, 0.2);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.action:hover {
+  transform: translate(-2px, -2px) rotate(-0.5deg);
+  box-shadow: 8px 8px 0 rgba(43, 32, 24, 0.22);
 }
 
 .action.ghost {
-  background: transparent;
-  color: var(--fg);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, #f1e4d3, #fffaf1);
+  border-color: #cbbfb1;
+  color: var(--ink-muted);
 }
 
 .docs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .doc-card {
   position: relative;
-  padding: 1.75rem;
-  border-radius: 1.25rem;
-  border: 1px solid transparent;
-  background: rgba(7, 6, 12, 0.8);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  padding: 1.85rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--edge);
+  background: var(--paper);
+  box-shadow: var(--shadow-soft), 6px 6px 0 rgba(43, 32, 24, 0.15);
   display: flex;
   flex-direction: column;
   gap: 1rem;
   min-height: 320px;
+  overflow: hidden;
+}
+
+.doc-card::before {
+  content: '';
+  position: absolute;
+  inset: 14px auto auto 16px;
+  width: 110px;
+  height: 20px;
+  background: repeating-linear-gradient(90deg, rgba(43, 32, 24, 0.08) 0 12px, rgba(43, 32, 24, 0.17) 12px 22px);
+  opacity: 0.38;
+  transform: rotate(-3deg);
+  border-radius: 5px;
+  pointer-events: none;
 }
 
 .doc-card h2 {
   margin: 0.35rem 0 0;
   font-size: 1.7rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
 .doc-card .subtitle {
   margin: 0;
-  color: var(--fg-muted);
-  font-size: 0.95rem;
+  color: var(--ink-muted);
+  font-size: 0.96rem;
 }
 
 .doc-card .excerpt {
-  color: var(--fg);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  color: var(--ink);
+  font-size: 0.97rem;
+  line-height: 1.6;
 }
 
 .doc-card .eyebrow {
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.28em;
+  color: var(--ink-muted);
 }
 
 .doc-card details {
   margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px dashed rgba(43, 32, 24, 0.25);
   padding-top: 1rem;
+  background: linear-gradient(180deg, rgba(241, 228, 211, 0.4), transparent 60%);
+  border-radius: 0.8rem;
 }
 
 .doc-card summary {
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.05em;
+  color: var(--ink);
 }
 
 .doc-card details[open] summary {
-  color: #9df0ff;
+  color: #a55438;
 }
 
 .markdown {
   margin-top: 1rem;
-  font-size: 0.9rem;
-  color: var(--fg-muted);
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  font-family: 'SFMono-Regular', ui-monospace, 'JetBrains Mono', 'Fira Code', monospace;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(244, 236, 222, 0.9)),
+    repeating-linear-gradient(180deg, rgba(43, 32, 24, 0.05), rgba(43, 32, 24, 0.05) 1px, transparent 1px, transparent 26px);
+  border: 1px solid var(--edge);
+  border-radius: 0.85rem;
+  padding: 1rem 1.1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .markdown h1,
 .markdown h2,
 .markdown h3 {
-  color: var(--fg);
+  color: var(--ink);
   margin-top: 1.2em;
+  margin-bottom: 0.35em;
+  border-bottom: 1px solid rgba(43, 32, 24, 0.12);
+  padding-bottom: 0.25em;
 }
 
 .markdown p,
 .markdown li {
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .markdown ul,
 .markdown ol {
-  padding-left: 1.2rem;
+  padding-left: 1.3rem;
+}
+
+.markdown code {
+  background: rgba(43, 32, 24, 0.08);
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.35rem;
+  color: var(--ink);
+}
+
+.markdown blockquote {
+  margin: 0.8rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid rgba(43, 32, 24, 0.3);
+  color: var(--ink);
 }
 
 .accent-horizon {
-  border-color: rgba(173, 116, 255, 0.5);
-  background: linear-gradient(145deg, rgba(173, 116, 255, 0.18), rgba(7, 6, 12, 0.9));
+  border-color: #c7ae8d;
+  background: linear-gradient(145deg, rgba(199, 174, 141, 0.4), rgba(253, 248, 239, 0.95));
 }
 
 .accent-ember {
-  border-color: rgba(255, 154, 118, 0.4);
-  background: linear-gradient(145deg, rgba(255, 154, 118, 0.16), rgba(7, 6, 12, 0.9));
+  border-color: #d78863;
+  background: linear-gradient(145deg, rgba(215, 136, 99, 0.35), rgba(253, 248, 239, 0.98));
 }
 
 .accent-aqua {
-  border-color: rgba(87, 244, 255, 0.4);
-  background: linear-gradient(145deg, rgba(87, 244, 255, 0.18), rgba(7, 6, 12, 0.92));
+  border-color: #9abcb0;
+  background: linear-gradient(145deg, rgba(154, 188, 176, 0.35), rgba(253, 248, 239, 0.95));
 }
 
 @media (max-width: 640px) {
   .hero {
-    padding: 1.5rem;
+    padding: 1.6rem;
   }
 
   .doc-card {
-    padding: 1.4rem;
+    padding: 1.5rem;
   }
 }
