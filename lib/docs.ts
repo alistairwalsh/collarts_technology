@@ -52,7 +52,7 @@ export async function getDocuments(): Promise<CourseDocument[]> {
     manifest.map(async (doc) => {
       const filePath = path.join(rootDir, doc.filename);
       const raw = await fs.readFile(filePath, 'utf-8');
-      const html = marked.parse(raw);
+      const html = await marked.parse(raw);
       return {
         ...doc,
         html,
