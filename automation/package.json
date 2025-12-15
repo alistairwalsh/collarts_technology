@@ -1,0 +1,16 @@
+{
+  "name": "collarts-max4live-automation",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Discord AI concierge + webhook bridge for the Collarts max4live course",
+  "scripts": {
+    "dev": "node src/server.js",
+    "register-commands": "node src/registerCommands.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2",
+    "tweetnacl": "^1.0.3"
+  }
+}
