@@ -27,7 +27,6 @@ const manifest = [
 ] as const;
 
 marked.setOptions({
-  headerIds: false,
   gfm: true
 });
 
